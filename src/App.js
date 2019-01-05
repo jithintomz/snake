@@ -7,14 +7,12 @@ class App extends Component {
   constructor() {
     super()
     this.state = { score: 0 }
-    //this.state.score = 0
   }
 
   componentDidMount() {
     this.canvas = this.refs.canvas
     this.canvasDimentions = [this.canvas.width, this.canvas.height]
     this.ctx = this.canvas.getContext('2d')
-    this.state.score = 0
     this.length_of_snake = 100
     this.snake_points = [[100, 30], [0, 30]]
     this.snake_directions = [[0, 1]]
@@ -22,7 +20,7 @@ class App extends Component {
     this.speed = 10
     this.drawApple(true)
     this.gameOver = false
-    setInterval(this.moveSnakeForward, 500)
+    setInterval(this.moveSnakeForward, 200)
     document.addEventListener("keydown", this.handleKeyDown)
   }
 
@@ -81,10 +79,10 @@ class App extends Component {
 
   checkGameOver = (head) => {
     var gameOver = false
-    if ((head[0] > this.canvas.width) || (head[1] > this.canvas.height)) {
+    if ((head[0] >= this.canvas.width) || (head[1] >= this.canvas.height)) {
       return true
     }
-    if ((head[0] < 0) || (head[1] < 0)) {
+    if ((head[0] <= 0) || (head[1] <= 0)) {
       return true
     }
 
@@ -146,7 +144,7 @@ class App extends Component {
           <div>
             Score {this.state.score}
           </div>
-          <canvas tabIndex="0" ref="canvas" width={640} height={425} ></canvas>
+          <canvas tabIndex="0" ref="canvas" width={640} height={430} ></canvas>
         </header>
       </div>
     );
